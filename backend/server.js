@@ -24,7 +24,7 @@ const __dirname = path.resolve();
 
 // CORS configuration
 const corsOptions = {
-  origin: 'https://nuochoa.vercel.app', // Lấy URL frontend từ biến môi trường
+  origin: process.env.FRONTEND_URL || 'https://nuochoa.vercel.app', // Lấy URL frontend từ biến môi trường
   credentials: true, // Hỗ trợ cookie
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Các HTTP methods được phép
   allowedHeaders: ['Content-Type', 'Authorization'], // Headers được phép
@@ -44,7 +44,9 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `http://localhost:${PORT}`,
+        url: process.env.NODE_ENV === "production"
+          ? 'https://web2-rho-gray.vercel.app' // URL backend production
+          : `http://localhost:${PORT}`, // URL local development
       },
     ],
   },
@@ -67,7 +69,7 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/order", orderRoute);
 app.use("/api/users", usersRoute);
 
-// Serve frontend in production
+// Serve frontend in production (nếu cần)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
   app.get("*", (req, res) => {
