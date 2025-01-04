@@ -5,7 +5,7 @@ import path from "path";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
 import cors from "cors";
-//routes
+// Routes
 import authRoutes from "./routes/auth.route.js";
 import productRoutes from "./routes/product.route.js";
 import cartRoutes from "./routes/cart.route.js";
@@ -14,28 +14,26 @@ import paymentRoutes from "./routes/payment.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
 import orderRoute from "./routes/order.route.js";
 import usersRoute from "./routes/users.route.js";
-
 import { connectDB } from "./lib/db.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 const __dirname = path.resolve();
 
+// CORS configuration
 const corsOptions = {
-  origin: 'http://localhost:3000',  // Chỉ định chính xác origin
-  credentials: true,  // Cho phép gửi cookies
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Các phương thức HTTP được phép
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Các headers cho phép
+  origin: process.env.CLIENT_URL || 'http://localhost:3000', // Lấy URL frontend từ biến môi trường
+  credentials: true, // Hỗ trợ cookie
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Các HTTP methods được phép
+  allowedHeaders: ['Content-Type', 'Authorization'], // Headers được phép
 };
 
-// Sử dụng middleware CORS cho tất cả các route
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
 // Swagger documentation setup
-
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -46,20 +44,20 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:" + PORT,
+        url: `http://localhost:${PORT}`,
       },
     ],
-    
   },
-  apis: ["./backend/routes/*.js"],
+  apis: ["./routes/*.js"], // Đường dẫn chứa file mô tả API
 };
-
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
+// Middleware
+app.use(express.json({ limit: "10mb" })); // Hỗ trợ parse body
 app.use(cookieParser());
 
+// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
@@ -69,17 +67,16 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/order", orderRoute);
 app.use("/api/users", usersRoute);
 
+// Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
 }
 
-
-
+// Start server
 app.listen(PORT, () => {
-  console.log("Server is running on http://localhost:" + PORT +"/api-docs");
-  connectDB();
+  console.log(`Server is running on http://localhost:${PORT}/api-docs`);
+  connectDB(); // Kết nối database
 });
