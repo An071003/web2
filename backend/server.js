@@ -24,7 +24,7 @@ const __dirname = path.resolve();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.CLIENT_URL || 'https://nuochoa-osvi32m7i-phong-les-projects-64cbfed5.vercel.app/', // Lấy URL frontend từ biến môi trường
+  origin: 'https://nuochoa.vercel.app', // Lấy URL frontend từ biến môi trường
   credentials: true, // Hỗ trợ cookie
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Các HTTP methods được phép
   allowedHeaders: ['Content-Type', 'Authorization'], // Headers được phép
