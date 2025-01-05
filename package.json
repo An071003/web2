@@ -4,11 +4,11 @@
   "description": "An e-commerce store backend",
   "main": "backend/server.js",
   "scripts": {
-    "dev": "nodemon backend/server.js", // Phục vụ phát triển với hot reload
-    "start": "node backend/server.js", // Phục vụ production
-    "build:frontend": "cd frontend && npm install && npm run build", // Build frontend
-    "start:full": "npm run build:frontend && npm start", // Build frontend trước khi chạy production
-    "test": "echo \"Error: no test specified\" && exit 1" // Placeholder cho test
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "start:full": "npm run build:frontend && npm start", 
+    "test": "echo \"Error: no test specified\" && exit 1" 
   },
   "keywords": ["e-commerce", "store", "backend", "api"],
   "author": "Your Name",
