@@ -25,7 +25,7 @@ const __dirname = path.resolve();
 
 // CORS configuration
 const corsOptions = {
-  origin: "https://nuochoa-4hvwtgwth-phong-les-projects-64cbfed5.vercel.app"
+  origin: process.env.FRONTEND_URL, // Lấy URL frontend từ biến môi trường
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -43,7 +43,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "https://web2-ie39.onrender.com/"
+        url: process.env.BACKEND_URL, // Lấy URL backend từ biến môi trường
       },
     ],
   },
