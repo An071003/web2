@@ -1,34 +1,37 @@
 {
-	"name": "e-commerce-store",
-	"version": "1.0.0",
-	"description": "",
-	"main": "backend/server.js",
-	"scripts": {
-		"dev": "nodemon backend/server.js",
-		"start": "nodemon backend/server.js"
-	},
-	"keywords": [],
-	"author": "",
-	"type": "module",
-	"license": "ISC",
-	"dependencies": {
-		"bcryptjs": "^2.4.3",
-		"cloudinary": "^2.5.1",
-		"cookie-parser": "^1.4.6",
-		"cors": "^2.8.5",
-		"cross-env": "^7.0.3",
-		"dotenv": "^16.4.5",
-		"express": "^4.19.2",
-		"ioredis": "^5.4.2",
-		"jsonwebtoken": "^9.0.2",
-		"mongoose": "^8.5.3",
-		"nodemailer": "^6.9.16",
-		"stripe": "^16.8.0",
-		"swagger-jsdoc": "^6.2.8",
-		"swagger-ui-express": "^5.0.1",
-		"yamljs": "^0.3.0"
-	},
-	"devDependencies": {
-		"nodemon": "^3.1.9"
-	}
+  "name": "e-commerce-store",
+  "version": "1.0.0",
+  "description": "An e-commerce store backend",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "nodemon backend/server.js", // Phục vụ phát triển với hot reload
+    "start": "node backend/server.js", // Phục vụ production
+    "build:frontend": "cd frontend && npm install && npm run build", // Build frontend
+    "start:full": "npm run build:frontend && npm start", // Build frontend trước khi chạy production
+    "test": "echo \"Error: no test specified\" && exit 1" // Placeholder cho test
+  },
+  "keywords": ["e-commerce", "store", "backend", "api"],
+  "author": "Your Name",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "ioredis": "^5.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.3",
+    "nodemailer": "^6.9.16",
+    "stripe": "^16.8.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
