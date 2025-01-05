@@ -25,7 +25,7 @@ const __dirname = path.resolve();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Default frontend URL for development
+  origin: process.env.FRONTEND_URL, // Lấy URL frontend từ biến môi trường
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -43,7 +43,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: process.env.BACKEND_URL || `http://localhost:${PORT}`, // Default to localhost if BACKEND_URL is not set
+        url: process.env.BACKEND_URL, // Lấy URL backend từ biến môi trường
       },
     ],
   },
@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Start server
 app.listen(PORT, async () => {
-  console.log(`Server is running on ${process.env.BACKEND_URL || `http://localhost:${PORT}/api-docs`}`);
+  console.log(`Server is running on ${process.env.BACKEND_URL}/api-docs`);
   try {
     await connectDB();
     console.log("Connected to the database successfully.");
@@ -85,4 +85,3 @@ app.listen(PORT, async () => {
     process.exit(1); // Exit the process if DB connection fails
   }
 });
-
